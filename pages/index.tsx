@@ -1,8 +1,23 @@
 import React from 'react';
 import * as contentful from 'contentful';
 
-const index = () => {
-  return <div>Hello</div>;
+interface entryObj {
+  title: string;
+  createdAt: string;
+  body: string;
+}
+
+const index = ({ title, createdAt, body }) => {
+  return (
+    <>
+      <div>Hello</div>
+      タイトル: {title}
+      <br />
+      作成日: {createdAt}
+      <br />
+      body: {body}
+    </>
+  );
 };
 
 export default index;
@@ -12,10 +27,14 @@ const config = {
   accessToken: process.env.CONTENTFUL_ACCESS_KEY,
 };
 
-(async () => {
+index.getInitialProps = async (): Promise<entryObj> => {
   const client = contentful.createClient(config);
 
   const entryId = '3EBAmzacsEo0OJI9MnZwkd';
   const entry = await client.getEntry(entryId);
-  console.log(entry); // 対象のEntry内容を取得できる
-})();
+  return {
+    title: entry.fields.title,
+    createdAt: entry.sys.createdAt,
+    body: entry.fields.body,
+  };
+};

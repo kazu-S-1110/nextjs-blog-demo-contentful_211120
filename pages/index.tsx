@@ -1,40 +1,36 @@
 import React from 'react';
-import * as contentful from 'contentful';
+import { Post } from '../component/Post';
+import { fetchEntries } from '../lib/contentful';
 
-interface entryObj {
-  title: string;
-  createdAt: string;
-  body: string;
-}
-
-const index = ({ title, createdAt, body }) => {
+const index = ({ posts }) => {
   return (
     <>
-      <div>Hello</div>
-      タイトル: {title}
-      <br />
-      作成日: {createdAt}
-      <br />
-      body: {body}
+      {posts.map((p) => {
+        return (
+          <Post
+            key={p.date}
+            date={p.date}
+            image={p.image}
+            body={p.body}
+            title={p.title}
+          />
+        );
+      })}
     </>
   );
 };
 
 export default index;
 
-const config = {
-  space: process.env.CONTENTFUL_SPACE_ID,
-  accessToken: process.env.CONTENTFUL_ACCESS_KEY,
-};
+export const getStaticProps = async () => {
+  const res = await fetchEntries();
+  const posts = await res.map((p) => {
+    return p.fields;
+  });
 
-index.getInitialProps = async (): Promise<entryObj> => {
-  const client = contentful.createClient(config);
-
-  const entryId = '3EBAmzacsEo0OJI9MnZwkd';
-  const entry = await client.getEntry(entryId);
   return {
-    title: entry.fields.title,
-    createdAt: entry.sys.createdAt,
-    body: entry.fields.body,
+    props: {
+      posts,
+    },
   };
 };

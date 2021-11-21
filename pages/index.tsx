@@ -10,7 +10,7 @@ const index = ({ posts }) => {
           <Post
             key={p.date}
             date={p.date}
-            image={p.image}
+            image={p.image.fields}
             body={p.body}
             title={p.title}
           />

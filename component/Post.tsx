@@ -7,8 +7,9 @@ export const Post = ({ date, image, title, body }) => {
       <Image
         src={`http:${image.file.url}`}
         alt="image"
-        width="590"
-        height="490"
+        width="300"
+        height="400"
+        objectFit="contain"
       />
       <div className="text">
         <h2>{title}</h2>

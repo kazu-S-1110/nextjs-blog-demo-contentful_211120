@@ -13,7 +13,7 @@ export const fetchEntries = async () => {
 export const getAllPostIds = async () => {
   const res = await fetchEntries();
   const Ids = res.map((p) => {
-    return p.fields.title;
+    return p.sys.id;
   });
   return Ids;
 };

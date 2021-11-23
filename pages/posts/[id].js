@@ -1,19 +1,16 @@
-import { fetchEntries, getAllPostIds } from '../../lib/contentful';
+import { fetchEntries } from '../../lib/contentful';
+import { getAllPostIds } from '../../lib/posts';
 
 export default function Post({ postData }) {
   return (
     <>
-      {postData.title}
-      <br />
-      {postData.id}
-      <br />
-      {postData.date}
+      <h1>Hello, Next</h1>
     </>
   );
 }
 
 export async function getStaticPaths() {
-  const paths = getAllPostIds();
+  const paths = await getAllPostIds();
   return {
     paths,
     fallback: false,

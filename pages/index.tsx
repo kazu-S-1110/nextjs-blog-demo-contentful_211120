@@ -1,6 +1,7 @@
 import React from 'react';
 import { Post } from '../component/Post';
-import { fetchEntries, getAllPostIds } from '../lib/contentful';
+import { fetchEntries } from '../lib/contentful';
+import { getPostData } from '../lib/posts';
 
 const index = ({ posts }) => {
   return (
@@ -35,4 +36,4 @@ export const getStaticProps = async () => {
   };
 };
 
-getAllPostIds();
+getPostData();

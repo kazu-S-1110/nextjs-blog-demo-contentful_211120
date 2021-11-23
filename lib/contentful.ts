@@ -9,17 +9,3 @@ export const fetchEntries = async () => {
   const entries = await client.getEntries();
   if (entries.items) return entries.items;
 };
-
-export async function getAllPostIds() {
-  const res = await fetchEntries();
-  const Ids = res.map((p) => {
-    return p.sys.id;
-  });
-  return Ids.map((id) => {
-    return {
-      params: {
-        id: id,
-      },
-    };
-  });
-}

@@ -9,3 +9,11 @@ export const fetchEntries = async () => {
   const entries = await client.getEntries();
   if (entries.items) return entries.items;
 };
+
+export const getAllPostIds = async () => {
+  const res = await fetchEntries();
+  const Ids = res.map((p) => {
+    return p.fields.title;
+  });
+  return Ids;
+};

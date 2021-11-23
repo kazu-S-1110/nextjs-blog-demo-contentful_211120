@@ -9,3 +9,8 @@ export const fetchEntries = async () => {
   const entries = await client.getEntries();
   if (entries.items) return entries.items;
 };
+
+export const fetchEntry = async (id) => {
+  const entry = await client.getEntry(id);
+  if (entry) return entry;
+};

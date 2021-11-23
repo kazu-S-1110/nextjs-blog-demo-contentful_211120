@@ -1,7 +1,6 @@
 import React from 'react';
 import { Post } from '../component/Post';
 import { fetchEntries } from '../lib/contentful';
-import { getPostData } from '../lib/posts';
 
 const index = ({ posts }) => {
   return (
@@ -25,7 +24,7 @@ export default index;
 
 export const getStaticProps = async () => {
   const res = await fetchEntries();
-  const posts = await res.map((p) => {
+  const posts = res.map((p) => {
     return p.fields;
   });
 
@@ -35,5 +34,3 @@ export const getStaticProps = async () => {
     },
   };
 };
-
-getPostData();

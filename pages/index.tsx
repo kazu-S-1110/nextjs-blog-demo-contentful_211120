@@ -8,8 +8,8 @@ const index = ({ posts }) => {
       {posts.map((p) => {
         return (
           <>
-            <Link href={`/posts/${p.sys.id}`} key={p.sys.id}>
-              {p.fields.title}
+            <Link href={`/posts/${p.sys.id}`} key={p.sys.id} passHref>
+              <h2>{p.fields.title}</h2>
             </Link>
             <br />
           </>

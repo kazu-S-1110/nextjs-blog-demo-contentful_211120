@@ -1,11 +1,11 @@
-import { fetchEntries } from '../../lib/contentful';
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import Image from 'next/image';
+import Date from '../../component/date';
 
 export default function Post({ postData }) {
-  // console.log(postData);
+  console.log(postData);
   const { title, image, body } = postData.fields;
-  console.log(image.fields.file.url);
+
   return (
     <>
       <h1>{title}</h1>
@@ -16,6 +16,7 @@ export default function Post({ postData }) {
         height="400"
         objectFit="contain"
       />
+      <Date dateString={postData.sys.createdAt} />
     </>
   );
 }

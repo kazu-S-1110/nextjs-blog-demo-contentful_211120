@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Date from '../../component/date';
 
 export default function Post({ postData }) {
-  console.log(postData);
   const { title, image, body } = postData.fields;
 
   return (

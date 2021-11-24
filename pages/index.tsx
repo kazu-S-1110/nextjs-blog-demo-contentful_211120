@@ -1,5 +1,5 @@
 import React from 'react';
-import { Post } from '../component/Post';
+import Link from 'next/link';
 import { fetchEntries } from '../lib/contentful';
 
 const index = ({ posts }) => {
@@ -7,13 +7,12 @@ const index = ({ posts }) => {
     <>
       {posts.map((p) => {
         return (
-          <Post
-            key={p.date}
-            date={p.date}
-            image={p.image.fields}
-            body={p.body}
-            title={p.title}
-          />
+          <>
+            <Link href={`/posts/${p.sys.id}`} key={p.sys.id}>
+              {p.fields.title}
+            </Link>
+            <br />
+          </>
         );
       })}
     </>
@@ -25,7 +24,7 @@ export default index;
 export const getStaticProps = async () => {
   const res = await fetchEntries();
   const posts = res.map((p) => {
-    return p.fields;
+    return p;
   });
 
   return {
